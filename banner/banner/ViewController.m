@@ -101,6 +101,7 @@
 }
 
 #pragma  mark --- UIScrollViewDelegate
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSInteger total=self.dataArray.count;
@@ -115,32 +116,21 @@
     
     page.currentPage=scrollView.contentOffset.x/screenW-1;
 }
-
+//不可以用下面这个代理方法，会有视觉上拖动的bug
 /*
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSInteger total=self.dataArray.count;
-    //计算当前显示的页数
-    NSInteger count = scrollView.contentOffset.x/scrollView.frame.size.width;
-    NSLog(@"%ld",count);
     
-//    if (count==0) {
-//        count = 5;
-//    }
-    UIPageControl *pageControl = (UIPageControl *)[self.view viewWithTag:100];
-    pageControl.currentPage = count;
-    
-    
-    if (scrollView.contentOffset.x>(total+1)*screenW) {
-        
-        [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+    if (scrollView.contentOffset.x==screenW*(total+1)) {
+        scrollView.contentOffset=CGPointMake(screenW, 0);
     }
     
-    else if(scrollView.contentOffset.x<0){
-        
-        [scrollView setContentOffset:CGPointMake((total+1)*scrollView.frame.size.width, 0) animated:NO];
+    if (scrollView.contentOffset.x==0) {
+        scrollView.contentOffset=CGPointMake(screenW*total, 0);
     }
     
+    page.currentPage=scrollView.contentOffset.x/screenW-1;
 }
 */
 - (void)didReceiveMemoryWarning {
