@@ -100,6 +100,10 @@
     page.currentPage=scroll.contentOffset.x/screenW-1;
 }
 
+
+
+
+
 #pragma  mark --- UIScrollViewDelegate
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
